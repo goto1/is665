@@ -1,4 +1,5 @@
 const browserSync = require('browser-sync').create();
+const browserify = require('browserify');
 const cssnano = require('cssnano');
 const gulp = require('gulp');
 const babel = require('gulp-babel');
@@ -42,7 +43,7 @@ gulp.task('sass', () => {
     .pipe(cached('sass'))
     .pipe(sass()).on('error', sass.logError)
     .pipe(postcss(preprocessor))
-    .pipe(rename({ suffix: 'min' }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.dist))
     .pipe(browserSync.stream());
 });
@@ -58,7 +59,7 @@ gulp.task('babel', () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('serve', ['pug', 'sass'], () => {
+gulp.task('serve', ['pug', 'sass', 'babel'], () => {
   browserSync.init({
     server: paths.dist,
     open: false,
@@ -66,6 +67,7 @@ gulp.task('serve', ['pug', 'sass'], () => {
 
   gulp.watch(paths.src.pug, ['pug']);
   gulp.watch(paths.src.sass, ['sass']);
+  gulp.watch(paths.src.js, ['babel']);
 });
 
 gulp.task('default', ['serve'], () => {

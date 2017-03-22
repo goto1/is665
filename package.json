@@ -29,5 +29,7 @@
     "postcss-cssnext": "^2.10.0",
     "postcss-import": "^9.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "normalize.css": "^5.0.0"
+  }
 }
