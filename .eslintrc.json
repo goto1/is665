@@ -5,6 +5,8 @@
     ],
     "rules": {
       "semi": ["error", "always"],
-      "space-before-function-paren": ["error", "never"]
+      "space-before-function-paren": ["error", "never"],
+      "arrow-body-style": ["error", "always"],
+      "no-console": ["error", { "allow": ["log"] }]
     }
 }
