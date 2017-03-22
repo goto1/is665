@@ -1,0 +1,13 @@
+# IS 665 - Data Analytics for IS
+
+### Course Description
+Coming soon...
+
+### Final Project Description
+Coming soon...
+
+### Technologies Used
+Coming soon...
+
+### Link
+Coming soon...
