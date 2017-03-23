@@ -82,17 +82,6 @@ h2
       float: right
       text-align: right
 
-// #console
-//   position: fixed
-//   left: 10px
-//   top: 10px
-//   padding: 5px
-//   background: rgba(0, 0, 0, 0.3)
-//   border-radius: 4px
-//   color: white
-//   font-size: 10px
-//   transform: translateZ(0)
-
 #pager
   margin: 0
   padding: 0
@@ -107,17 +96,17 @@ h2
     height: 20px
     line-height: 20px
     text-align: center
-  &:after
-    content: ''
-    display: inline-block
-    width: 6px
-    height: 6px
-    border-radius: 6px
-    background: white
-    transition: all .2s ease
-    opacity: .4
-  span
-    display: none
+    &::after
+      content: ''
+      display: inline-block
+      width: 6px
+      height: 6px
+      border-radius: 6px
+      background: white
+      transition: all .2s ease
+      opacity: .4
+    span
+      display: none
 
 #pager li.active a:after, #pager li a:hover:after
   transform: scale(1.8)
