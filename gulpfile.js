@@ -1,5 +1,4 @@
 const browserSync = require('browser-sync').create();
-const browserify = require('browserify');
 const cssnano = require('cssnano');
 const gulp = require('gulp');
 const babel = require('gulp-babel');

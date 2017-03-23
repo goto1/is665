@@ -8,23 +8,26 @@ html(lang='en')
     link(rel='stylesheet' href='main.min.css')
     
   body
-    section.section
+    section#1.section
       .box
         h2 Block #1
         .btn-wrap
-    section.section
+    section#2.section
       .box
         h2 Block #2
         .btn-wrap
-    section.section
+    section#3.section
       .box
         h2 Block #3
         .btn-wrap
-    section.section
+    section#4.section
       .box
         h2 Block #4
         .btn-wrap
+          
     #pager
+      //- a(href='#')
+      //- a(href='#')
     
-    script(src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous')
+    script(src='libs/smoothscroll-polyfill.js')
     script(src='main.js')

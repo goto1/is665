@@ -1,3 +1,55 @@
+'use strict';
+
+/* global window, document */
+
+function getAllSections() {
+  return document.getElementsByTagName('section');
+}
+
+function createLink(href, innerHTML, className) {
+  var link = document.createElement('a');
+  link.href = '#' + href;
+  link.innerHTML = innerHTML;
+  link.className = className;
+
+  link.onclick = function (event) {
+    // const select = `#${href}`;
+    // console.log(select);
+    // console.log(document.getElementById(href));
+    // document.getElementById.scrollIntoView({ behavior: 'smooth' });
+    // document.querySelector(select).scrollIntoView({ behavior: 'smooth' });
+    // document.querySelector('#\\4').scrollIntoView({ behavior: 'smooth' });
+    // console.log(document.querySelector('[id="4"]').scrollIntoView({ behavior: 'smooth' }));
+    // console.log(window.scrollBy());
+    document.querySelector('[id="' + href + '"]').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return link;
+}
+
+function createBottomPaginationFor(sections) {
+  for (var i = 0; i < sections.length; i++) {
+    var btnWrap = sections[i].getElementsByClassName('btn-wrap')[0];
+    var curr = i + 1;
+
+    if (i === 0) {
+      btnWrap.appendChild(createLink(curr + 1, 'Next &#8594;', 'btn btn-next'));
+    } else if (i === sections.length - 1) {
+      btnWrap.appendChild(createLink(curr - 1, '&#8592; Previous', 'btn btn-prev'));
+    } else {
+      btnWrap.appendChild(createLink(curr - 1, '&#8592; Previous', 'btn btn-prev'));
+      btnWrap.appendChild(createLink(curr + 1, 'Next &#8594;', 'btn btn-next'));
+    }
+  }
+}
+
+window.onload = function init() {
+  console.log('Hello');
+
+  var sections = getAllSections();
+  createBottomPaginationFor(sections);
+};
+
 // (() => {
 //   'use strict';
 //
@@ -90,5 +142,4 @@
 //     }
 //   });
 // })();
-"use strict";
 //# sourceMappingURL=main.js.map
