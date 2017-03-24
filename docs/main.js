@@ -2,17 +2,13 @@
 
 /* global window, document */
 
-function getAllSections() {
-  return document.getElementsByTagName('section');
-}
-
 function createLink(href, innerHTML, className) {
   var link = document.createElement('a');
   link.href = '#' + href;
   link.innerHTML = innerHTML;
   link.className = className;
 
-  link.onclick = function (event) {
+  link.onclick = function () {
     document.querySelector('[id="' + href + '"]').scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -22,15 +18,14 @@ function createLink(href, innerHTML, className) {
 function createBottomPaginationFor(sections) {
   for (var i = 0; i < sections.length; i++) {
     var btnWrap = sections[i].getElementsByClassName('btn-wrap')[0];
-    var curr = i + 1;
 
     if (i === 0) {
-      btnWrap.appendChild(createLink(curr + 1, 'Next &#8594;', 'btn btn-next'));
+      btnWrap.appendChild(createLink(sections[i + 1].id, 'Next &#8594;', 'btn btn-next'));
     } else if (i === sections.length - 1) {
-      btnWrap.appendChild(createLink(curr - 1, '&#8592; Previous', 'btn btn-prev'));
+      btnWrap.appendChild(createLink(sections[i - 1].id, '&#8592; Previous', 'btn btn-prev'));
     } else {
-      btnWrap.appendChild(createLink(curr - 1, '&#8592; Previous', 'btn btn-prev'));
-      btnWrap.appendChild(createLink(curr + 1, 'Next &#8594;', 'btn btn-next'));
+      btnWrap.appendChild(createLink(sections[i - 1].id, '&#8592; Previous', 'btn btn-prev'));
+      btnWrap.appendChild(createLink(sections[i + 1].id, 'Next &#8594;', 'btn btn-next'));
     }
   }
 }
@@ -47,14 +42,12 @@ function createSidePaginationFor(sections) {
   var pager = document.getElementById('pager');
 
   var _loop = function _loop(i) {
-    var curr = i + 1;
     var listItem = document.createElement('li');
-
-    listItem.appendChild(createLinkForSideNavigation(curr));
+    listItem.appendChild(createLinkForSideNavigation(sections[i].id));
     pager.appendChild(listItem);
 
     listItem.onclick = function () {
-      document.querySelector('[id="' + curr + '"]').scrollIntoView({ behavior: 'smooth' });
+      document.querySelector('[id="' + sections[i].id + '"]').scrollIntoView({ behavior: 'smooth' });
     };
   };
 
@@ -63,10 +56,18 @@ function createSidePaginationFor(sections) {
   }
 }
 
-window.onload = function init() {
-  var sections = getAllSections();
-  var sectionsPositions = [];
+function removeActiveClassFromList() {
   var pager = document.getElementById('pager');
+
+  for (var i = 0; i < pager.children.length; i++) {
+    pager.children[i].className = '';
+  }
+}
+
+window.onload = function init() {
+  var sections = document.getElementsByTagName('section');
+  var pager = document.getElementById('pager');
+  var sectionsPositions = [];
 
   createBottomPaginationFor(sections);
   createSidePaginationFor(sections);
@@ -88,9 +89,7 @@ window.onload = function init() {
       var idx = sectionsPositions.indexOf(found);
       var listItems = pager.children;
 
-      for (var _i = 0; _i < pager.children.length; _i++) {
-        pager.children[_i].className = '';
-      }
+      removeActiveClassFromList();
 
       listItems[idx].className = 'active';
     }

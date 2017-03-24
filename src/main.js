@@ -1,17 +1,15 @@
 /* global window, document */
 
-function getAllSections() {
-  return document.getElementsByTagName('section');
-}
-
 function createLink(href, innerHTML, className) {
   const link = document.createElement('a');
   link.href = `#${href}`;
   link.innerHTML = innerHTML;
   link.className = className;
 
-  link.onclick = (event) => {
-    document.querySelector(`[id="${href}"]`).scrollIntoView({ behavior: 'smooth' });
+  link.onclick = () => {
+    document
+      .querySelector(`[id="${href}"]`)
+      .scrollIntoView({ behavior: 'smooth' });
   };
 
   return link;
@@ -20,22 +18,21 @@ function createLink(href, innerHTML, className) {
 function createBottomPaginationFor(sections) {
   for (let i = 0; i < sections.length; i++) {
     const btnWrap = sections[i].getElementsByClassName('btn-wrap')[0];
-    const curr = i + 1;
 
     if (i === 0) {
       btnWrap.appendChild(
-        createLink(curr + 1, 'Next &#8594;', 'btn btn-next')
+        createLink(sections[i + 1].id, 'Next &#8594;', 'btn btn-next')
       );
     } else if (i === sections.length - 1) {
       btnWrap.appendChild(
-        createLink(curr - 1, '&#8592; Previous', 'btn btn-prev')
+        createLink(sections[i - 1].id, '&#8592; Previous', 'btn btn-prev')
       );
     } else {
       btnWrap.appendChild(
-        createLink(curr - 1, '&#8592; Previous', 'btn btn-prev')
+        createLink(sections[i - 1].id, '&#8592; Previous', 'btn btn-prev')
       );
       btnWrap.appendChild(
-        createLink(curr + 1, 'Next &#8594;', 'btn btn-next')
+        createLink(sections[i + 1].id, 'Next &#8594;', 'btn btn-next')
       );
     }
   }
@@ -51,24 +48,31 @@ function createLinkForSideNavigation(href) {
 
 function createSidePaginationFor(sections) {
   const pager = document.getElementById('pager');
-
   for (let i = 0; i < sections.length; i++) {
-    const curr = i + 1;
     const listItem = document.createElement('li');
-
-    listItem.appendChild(createLinkForSideNavigation(curr));
+    listItem.appendChild(createLinkForSideNavigation(sections[i].id));
     pager.appendChild(listItem);
 
     listItem.onclick = () => {
-      document.querySelector(`[id="${curr}"]`).scrollIntoView({ behavior: 'smooth' });
+      document
+        .querySelector(`[id="${sections[i].id}"]`)
+        .scrollIntoView({ behavior: 'smooth' });
     };
   }
 }
 
-window.onload = function init() {
-  const sections = getAllSections();
-  const sectionsPositions = [];
+function removeActiveClassFromList() {
   const pager = document.getElementById('pager');
+
+  for (let i = 0; i < pager.children.length; i++) {
+    pager.children[i].className = '';
+  }
+}
+
+window.onload = function init() {
+  const sections = document.getElementsByTagName('section');
+  const pager = document.getElementById('pager');
+  const sectionsPositions = [];
 
   createBottomPaginationFor(sections);
   createSidePaginationFor(sections);
@@ -78,7 +82,7 @@ window.onload = function init() {
     sectionsPositions.push(pos.top);
   }
 
-  pager.children[0].className='active';
+  pager.children[0].className = 'active';
 
   window.onscroll = () => {
 
@@ -90,9 +94,7 @@ window.onload = function init() {
       const idx = sectionsPositions.indexOf(found);
       const listItems = pager.children;
 
-      for (let i = 0; i < pager.children.length; i++) {
-        pager.children[i].className = '';
-      }
+      removeActiveClassFromList();
 
       listItems[idx].className = 'active';
     }
