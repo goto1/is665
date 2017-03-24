@@ -4,6 +4,21 @@
 body
   font-family: 'Roboto', sans-serif
   font-weight: 400
+  position: relative
+
+.names
+  position: absolute
+  top: 5px
+  right: 10px
+  color: white
+  z-index: 1
+  p
+    font-size: .95em
+    margin: 0
+    padding: 0
+    text-transform: uppercase
+    letter-spacing: 2px
+    text-align: right
 
 section
   position: relative
@@ -28,8 +43,8 @@ section
 .box
   box-sizing: border-box
   position: absolute
-  width: 60%
-  height: 400px
+  width: 80%
+  height: 80%
   padding: 20px 20px 50px
   background: white
   border-bottom: 1px solid rgba(0, 0, 0, .1)
@@ -39,13 +54,17 @@ section
   &:hover
     box-shadow: 0 14px 21px 0px rgba(0, 0, 0, .2)
     transform: translateY(-5px)
+  div
+    margin: 25px 0 5px 0
+    letter-spacing: 1.25px
+    line-height: 25px
+    text-align: left
 
-h2
+h1
   margin: 0
-  font-size: 64px
-  font-weight: 500
-  line-height: 330px
-  white-space: nowrap
+  padding: 2.5px 0 2.5px 0
+  text-align: right
+  border-bottom: 1px solid #D81B60
 
 .btn-wrap
   position: absolute

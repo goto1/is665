@@ -85,9 +85,8 @@ window.onload = function init() {
   pager.children[0].className = 'active';
 
   window.onscroll = () => {
-
     const found = sectionsPositions.find((sectionPosition) => {
-      return sectionPosition === window.pageYOffset;
+      return sectionPosition === window.scrollY;
     });
 
     if (found >= 0) {
