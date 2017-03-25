@@ -5,10 +5,10 @@ A graduate level introduction to data analysis, probability and statistics, from
 
 ### Project Descriptions
 
-## Project #1
+#### Project #1
 Teams are expected to find an interesting data set and visualize it using Tableau or Crystal report tools.
 
-## Project #2
+#### Project #2
 Teams are expected to work with a real-world organization to gather data set, analyze it, and try to extract insightful information/knowledge using RapidMiner or SPSS Modeler.
 
 ### Technologies Used
