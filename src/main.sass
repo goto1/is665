@@ -1,117 +1,86 @@
 @import 'normalize.css'
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500')
 
-body, html
-  width: 100%
+.carousel-fade 
+  .carousel-inner 
+    .item 
+      transition-property: opacity
+
+        
+    .item,
+    .active.left,
+    .active.right 
+        opacity: 0
+
+    .active,
+    .next.left,
+    .prev.right 
+        opacity: 1
+
+    .next,
+    .prev,
+    .active.left,
+    .active.right 
+        left: 0
+        transform: translate3d(0, 0, 0)
+
+  .carousel-control 
+      z-index: 2
+
+html,
+body,
+.carousel,
+.carousel-inner,
+.carousel-inner .item
   height: 100%
 
-body
-  font-family: 'Roboto', sans-serif
-  background-color: #222
-  padding: 0px
-  margin: 0px
+.item:nth-child(1) 
+  background: #74C390
+.item:nth-child(2)
+  background: #51BCE8
+.item:nth-child(3)
+  background: #E46653
 
-#nav
-  position: relative
-  z-index: 5000
-  text-align: center
-
-#dots
-  position: absolute
-  z-index: 5000
-  bottom: 40px
-  left: 50%
-  transform: translate(-50%, 0%)
-
-.dot
-  width: 8px
-  height: 8px
-  border-radius: 50%
-  position: relative
-  float: left
-  background-color: #fff
-  opacity: 1
-  margin: 5px
-  margin-bottom: 0px
-  cursor: pointer
-  border: 2px solid rgba(255, 255, 255, 0.7)
-
-#prevBtn, #nextBtn
-  color: white
-  font-size: 45px
-  margin: 15px 15px 0px 15px
-  position: relative
-  cursor: pointer
-
-.box
+.content
   width: 100%
   height: 100%
-  position: absolute
-  color: white
-  top: 0px
-  left: 0px
+  overflow: hidden
+  display: flex
+  justify-content: center
+  align-items: center
+  .slide
+    width: 90%
+    height: 80%
+    overflow: hidden
+    .tableauPlaceholder
+      width: 100%
+      height: 100%
 
-.slide .authors
-  position: absolute
-  z-index: 6000
-  color: white
-  right: 10px
-  top: 5px
-  letter-spacing: 2px
-  text-align: right
-  font-weight: 500
-  text-transform: uppercase
-  p
-    padding: 0
-    margin: 0
-    font-size: 1.15em
+.carousel-indicators
+  li, li.active
+    margin: 0 5px 0 0
 
-.slide span
-  display: block
-  position: absolute
-  transform: translate(-50%, -50%)
-  left: 50%
-  top: 50%
-  width: 80%
-  height: 70%
-  background: white
-  color: #404040
-  border-radius: 2.5px
-  padding: 15px
-  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19)
-  transition: .5s
-  &::hover
-    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 20px 60px 0 rgba(0, 0, 0, 0.19)
-  h2
-    margin: 0
-    text-align: right
-    letter-spacing: 1.85px
-    font-size: 2em
-    padding: 0 0 2.5px 0
-    font-weight: 600
-  .content
-    margin: 10px 0 0 0
-    font-size: 1.5em
-    letter-spacing: 1px
-    line-height: 30px
-
-#first
-  background-color: #FF4040
-  color: #FF4040
-  h2
-    border-bottom: 3px solid #FF4040
-#second
-  background-color: #5BCC1F
-  color: #5BCC1F
-  h2
-    border-bottom: 3px solid #5BCC1F
-#third
-  background-color: #40B5FF
-  color: #40B5FF
-  h2
-    border-bottom: 3px solid #40B5FF
-#fourth
-  background-color: #B273FF
-  color: #B273FF
-  h2
-    border-bottom: 3px solid #B273FF
+// #first
+//   background-color: #FF4040
+//   color: #FF4040
+//   h2
+//     border-bottom: 3px solid #FF4040
+//   .question
+//     font-size: 1.25em
+//     text-align: center
+//     line-height: 40px
+// #second
+//   background-color: #5BCC1F
+//   color: #5BCC1F
+//   h2
+//     border-bottom: 3px solid #5BCC1F
+// #third
+//   background-color: #40B5FF
+//   color: #40B5FF
+//   h2
+//     border-bottom: 3px solid #40B5FF
+// #fourth
+//   background-color: #B273FF
+//   color: #B273FF
+//   h2
+//     border-bottom: 3px solid #B273FF
