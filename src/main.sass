@@ -1,86 +1,40 @@
 @import 'normalize.css'
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500')
 
-.carousel-fade 
-  .carousel-inner 
-    .item 
-      transition-property: opacity
+body 
+  transition: all 0.5s ease-in-out
+  position: relative
+  height: 100vh
 
-        
-    .item,
-    .active.left,
-    .active.right 
-        opacity: 0
+nav
+  text-align: center
+  button
+    background: none
+    border: none
+    &:focus
+      outline: none
 
-    .active,
-    .next.left,
-    .prev.right 
-        opacity: 1
+    .fa
+      font-size: 2.75em
+      display: inline-block
+      margin: 5px 10px 5px 10px
+      color: white
 
-    .next,
-    .prev,
-    .active.left,
-    .active.right 
-        left: 0
-        transform: translate3d(0, 0, 0)
-
-  .carousel-control 
-      z-index: 2
-
-html,
-body,
-.carousel,
-.carousel-inner,
-.carousel-inner .item
-  height: 100%
-
-.item:nth-child(1) 
-  background: #74C390
-.item:nth-child(2)
-  background: #51BCE8
-.item:nth-child(3)
-  background: #E46653
-
-.content
-  width: 100%
-  height: 100%
-  overflow: hidden
+.dots
   display: flex
+  position: absolute
+  bottom: 5px
+  width: 100%
   justify-content: center
-  align-items: center
-  .slide
-    width: 90%
-    height: 80%
-    overflow: hidden
-    .tableauPlaceholder
-      width: 100%
-      height: 100%
-
-.carousel-indicators
-  li, li.active
-    margin: 0 5px 0 0
-
-// #first
-//   background-color: #FF4040
-//   color: #FF4040
-//   h2
-//     border-bottom: 3px solid #FF4040
-//   .question
-//     font-size: 1.25em
-//     text-align: center
-//     line-height: 40px
-// #second
-//   background-color: #5BCC1F
-//   color: #5BCC1F
-//   h2
-//     border-bottom: 3px solid #5BCC1F
-// #third
-//   background-color: #40B5FF
-//   color: #40B5FF
-//   h2
-//     border-bottom: 3px solid #40B5FF
-// #fourth
-//   background-color: #B273FF
-//   color: #B273FF
-//   h2
-//     border-bottom: 3px solid #B273FF
+  .dot
+    width: 15px
+    height: 15px
+    color: white
+    background: white
+    border-radius: 500px
+    margin: 0 5px 0 5px
+    opacity: .5
+    transition: all 0.5s ease-in-out
+  .active
+    opacity: 1
+    transform: translateY(-5px)
