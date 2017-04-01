@@ -5,19 +5,23 @@ body
   transition: all 1s ease-in-out
   position: relative
   height: 100vh
-  overflow: hidden
+  // overflow: hidden
   display: flex
   justify-content: center
   align-items: center
   font-family: 'Roboto', sans-serif
 
 section
-  width: 90%
-  height: 80%
+  width: 960px
+  height: 620px
+  @media (max-width: 1200px)
+    width: 85%
+  @media (max-height: 720px)
+    height: 80%
+
   background: white
-  transition: all 0.5s ease-in-out 0.15s
+  transition: all 0.5s ease-in-out
   position: absolute
-  display: block
   overflow: hidden
   opacity: 0
   border-radius: 2px
@@ -45,6 +49,10 @@ section
 #sec6
   h2
     border-bottom: 3px solid #2EE5CA
+
+.tableauPlaceholder
+  height: 100%
+
 
 .content
   padding: 5px 
