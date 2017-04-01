@@ -23,11 +23,13 @@ Pagination.prototype.prevPage = function () {
   }
 };
 
-var colors = ['#FF4040', '#5BCC1F', '#40B5FF', '#B273FF'];
+// '#F35138', '#CC1FCB', '#FFB040', '#FF5A59', '#33FFE1', '#FF6F33', '#FF8873'
+
+var colors = ['#FF4040', '#5BCC1F', '#40B5FF', '#B273FF', '#FF8873', '#2EE5CA'];
 var body = document.getElementsByTagName('body')[0];
 var buttons = document.getElementsByTagName('button');
 var dots = document.getElementsByClassName('dots');
-var pagination = new Pagination(0, colors.length);
+var pagination = new Pagination(5, colors.length);
 var nextPageBtn = buttons[1];
 var prevPageBtn = buttons[0];
 var sections = document.getElementsByTagName('section');
@@ -45,9 +47,6 @@ function showCurrentSection() {
 nextPageBtn.onclick = function () {
   pagination.nextPage();
   setBodyBgColorTo(colors[pagination.currPage]);
-  // setActiveDot(pagination.currPage);
-  // updateNavBtnStyles();
-  // showCurrentSection();
   updateUI();
 };
 
@@ -106,13 +105,10 @@ function updateUI() {
 }
 
 function init() {
-  setBodyBgColorTo(colors[0]);
+  setBodyBgColorTo(colors[pagination.currPage]);
   createNavDots();
   setActiveDot(pagination.currPage);
   updateNavBtnStyles();
-  for (var i = 0; i < sections.length; i++) {
-    sections[i].className = 'move-to-right';
-  }
   showCurrentSection();
 }
 

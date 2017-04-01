@@ -23,13 +23,16 @@ Pagination.prototype.prevPage = function() {
   }
 }
 
+// '#F35138', '#CC1FCB', '#FFB040', '#FF5A59', '#33FFE1', '#FF6F33', '#FF8873'
+
 const colors = [
-  '#FF4040', '#5BCC1F', '#40B5FF', '#B273FF'
+  '#FF4040', '#5BCC1F', '#40B5FF', '#B273FF', 
+  '#FF8873', '#2EE5CA'
 ];
 const body = document.getElementsByTagName('body')[0];
 const buttons = document.getElementsByTagName('button');
 const dots = document.getElementsByClassName('dots');
-const pagination = new Pagination(0, colors.length);
+const pagination = new Pagination(5, colors.length);
 const nextPageBtn = buttons[1];
 const prevPageBtn = buttons[0];
 const sections = document.getElementsByTagName('section');
@@ -47,9 +50,6 @@ function showCurrentSection() {
 nextPageBtn.onclick = () => {
   pagination.nextPage();
   setBodyBgColorTo(colors[pagination.currPage]);
-  // setActiveDot(pagination.currPage);
-  // updateNavBtnStyles();
-  // showCurrentSection();
   updateUI();
 };
 
@@ -104,13 +104,10 @@ function updateUI() {
 }
 
 function init() {
-  setBodyBgColorTo(colors[0]);
+  setBodyBgColorTo(colors[pagination.currPage]);
   createNavDots();
   setActiveDot(pagination.currPage);
   updateNavBtnStyles();
-  for (let i = 0; i < sections.length; i++) {
-    sections[i].className = 'move-to-right';
-  }
   showCurrentSection();
 }
 
