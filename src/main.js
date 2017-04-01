@@ -29,7 +29,6 @@ const colors = [
 const body = document.getElementsByTagName('body')[0];
 const buttons = document.getElementsByTagName('button');
 const dots = document.getElementsByClassName('dots');
-const currPage = 0;
 const pagination = new Pagination(0, colors.length);
 const nextPageBtn = buttons[1];
 const prevPageBtn = buttons[0];
@@ -38,12 +37,14 @@ nextPageBtn.onclick = () => {
   pagination.nextPage();
   setBodyBgColorTo(colors[pagination.currPage]);
   setActiveDot(pagination.currPage);
+  updateNavBtnStyles();
 };
 
 prevPageBtn.onclick = () => {
   pagination.prevPage();
   setBodyBgColorTo(colors[pagination.currPage]);
   setActiveDot(pagination.currPage);
+  updateNavBtnStyles();
 };
 
 function createNavDots() {
@@ -52,6 +53,12 @@ function createNavDots() {
   for (let i = 0; i < colors.length; i++) {
     const dot = document.createElement('div');
     dot.className = 'dot';
+    dot.onclick = () => {
+      setBodyBgColorTo(colors[i]);
+      pagination.currPage = i;
+      setActiveDot(pagination.currPage);
+      updateNavBtnStyles();
+    }
     dots.append(dot);
   }
 }
@@ -68,10 +75,22 @@ function setBodyBgColorTo(color) {
   body.bgColor = color;
 }
 
+function updateNavBtnStyles() {
+  nextPageBtn.className = '';
+  prevPageBtn.className = '';
+  if (!pagination.hasPrev()) {
+    prevPageBtn.className = 'btn-not-active';
+  }
+  if (!pagination.hasNext()) {
+    nextPageBtn.className = 'btn-not-active';
+  }
+}
+
 function init() {
   setBodyBgColorTo(colors[0]);
   createNavDots();
   setActiveDot(pagination.currPage);
+  updateNavBtnStyles();
 }
 
 init();

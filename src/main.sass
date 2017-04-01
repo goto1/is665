@@ -8,22 +8,32 @@ body
 
 nav
   text-align: center
+  position: absolute
+  top: -3%
+  left: 0
+  right: 0
   button
     background: none
     border: none
+    opacity: 1
+    transition: all 0.5s ease-in-out
+    cursor: pointer
     &:focus
       outline: none
 
     .fa
       font-size: 2.75em
       display: inline-block
-      margin: 5px 10px 5px 10px
+      margin: 0 5px
       color: white
+  .btn-not-active
+    opacity: .5
+    cursor: not-allowed
 
 .dots
   display: flex
   position: absolute
-  bottom: 5px
+  bottom: 5%
   width: 100%
   justify-content: center
   .dot
@@ -32,9 +42,10 @@ nav
     color: white
     background: white
     border-radius: 500px
-    margin: 0 5px 0 5px
+    margin: 0 5px
     opacity: .5
     transition: all 0.5s ease-in-out
+    cursor: pointer
   .active
     opacity: 1
     transform: translateY(-5px)
