@@ -30,19 +30,31 @@ var dots = document.getElementsByClassName('dots');
 var pagination = new Pagination(0, colors.length);
 var nextPageBtn = buttons[1];
 var prevPageBtn = buttons[0];
+var sections = document.getElementsByTagName('section');
+
+function showCurrentSection() {
+  for (var i = 0; i < pagination.currPage; i++) {
+    sections[i].className = 'move-to-left';
+  }
+  for (var _i = pagination.currPage + 1; _i < sections.length; _i++) {
+    sections[_i].className = 'move-to-right';
+  }
+  sections[pagination.currPage].className = 'active';
+}
 
 nextPageBtn.onclick = function () {
   pagination.nextPage();
   setBodyBgColorTo(colors[pagination.currPage]);
-  setActiveDot(pagination.currPage);
-  updateNavBtnStyles();
+  // setActiveDot(pagination.currPage);
+  // updateNavBtnStyles();
+  // showCurrentSection();
+  updateUI();
 };
 
 prevPageBtn.onclick = function () {
   pagination.prevPage();
   setBodyBgColorTo(colors[pagination.currPage]);
-  setActiveDot(pagination.currPage);
-  updateNavBtnStyles();
+  updateUI();
 };
 
 function createNavDots() {
@@ -54,8 +66,7 @@ function createNavDots() {
     dot.onclick = function () {
       setBodyBgColorTo(colors[i]);
       pagination.currPage = i;
-      setActiveDot(pagination.currPage);
-      updateNavBtnStyles();
+      updateUI();
     };
     dots.append(dot);
   };
@@ -88,11 +99,21 @@ function updateNavBtnStyles() {
   }
 }
 
+function updateUI() {
+  setActiveDot(pagination.currPage);
+  updateNavBtnStyles();
+  showCurrentSection();
+}
+
 function init() {
   setBodyBgColorTo(colors[0]);
   createNavDots();
   setActiveDot(pagination.currPage);
   updateNavBtnStyles();
+  for (var i = 0; i < sections.length; i++) {
+    sections[i].className = 'move-to-right';
+  }
+  showCurrentSection();
 }
 
 init();
