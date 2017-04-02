@@ -5,30 +5,27 @@ body
   transition: all 1s ease-in-out
   position: relative
   height: 100vh
-  // overflow: hidden
+  overflow: hidden
   display: flex
   justify-content: center
   align-items: center
   font-family: 'Roboto', sans-serif
+  min-width: 900px
 
 section
-  width: 960px
-  height: 620px
-  @media (max-width: 1200px)
-    width: 85%
-  @media (max-height: 720px)
-    height: 80%
-
+  width: 900px
+  height: 570px
   background: white
   transition: all 0.5s ease-in-out
-  position: absolute
   overflow: hidden
   opacity: 0
   border-radius: 2px
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
 .move-to-left
+  position: absolute
   transform: translateX(-125%)
 .move-to-right
+  position: absolute
   transform: translateX(125%)
 .active
   transform: translateX(0)
@@ -52,7 +49,14 @@ section
 
 .tableauPlaceholder
   height: 100%
-
+  iframe
+    height: 100% !important
+    .tab-toolbar-container
+      border: 1px solid red
+iframe
+  width: 100%
+  height: 100%
+  border: none
 
 .content
   padding: 5px 
@@ -107,7 +111,7 @@ nav
       color: white
   .btn-not-active
     opacity: .5
-    cursor: not-allowed
+    // cursor: not-allowed
 
 .dots
   display: flex
@@ -128,3 +132,5 @@ nav
   .active
     opacity: 1
     transform: translateY(-5px)
+  .hidden
+    display: none

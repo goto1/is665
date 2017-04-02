@@ -29,10 +29,10 @@ var colors = ['#FF4040', '#5BCC1F', '#40B5FF', '#B273FF', '#FF8873', '#2EE5CA'];
 var body = document.getElementsByTagName('body')[0];
 var buttons = document.getElementsByTagName('button');
 var dots = document.getElementsByClassName('dots');
+var sections = document.getElementsByTagName('section');
 var pagination = new Pagination(0, colors.length);
 var nextPageBtn = buttons[1];
 var prevPageBtn = buttons[0];
-var sections = document.getElementsByTagName('section');
 
 function showCurrentSection() {
   for (var i = 0; i < pagination.currPage; i++) {
@@ -70,7 +70,7 @@ function createNavDots() {
     dots.append(dot);
   };
 
-  for (var i = 0; i < colors.length; i++) {
+  for (var i = 0; i < sections.length; i++) {
     _loop(i);
   }
 }

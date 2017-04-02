@@ -32,10 +32,10 @@ const colors = [
 const body = document.getElementsByTagName('body')[0];
 const buttons = document.getElementsByTagName('button');
 const dots = document.getElementsByClassName('dots');
+const sections = document.getElementsByTagName('section');
 const pagination = new Pagination(0, colors.length);
 const nextPageBtn = buttons[1];
 const prevPageBtn = buttons[0];
-const sections = document.getElementsByTagName('section');
 
 function showCurrentSection() {
   for (let i = 0; i < pagination.currPage; i++) {
@@ -62,7 +62,7 @@ prevPageBtn.onclick = () => {
 function createNavDots() {
   const dots = document.getElementsByClassName('dots')[0];
 
-  for (let i = 0; i < colors.length; i++) {
+  for (let i = 0; i < sections.length; i++) {
     const dot = document.createElement('div');
     dot.className = 'dot';
     dot.onclick = () => {
@@ -80,6 +80,7 @@ function setActiveDot(currPage) {
     dots[i].className = 'dot';
   }
   dots[currPage].className = 'dot active';
+
 }
 
 function setBodyBgColorTo(color) {
