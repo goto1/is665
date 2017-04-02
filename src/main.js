@@ -23,11 +23,12 @@ Pagination.prototype.prevPage = function() {
   }
 }
 
-// '#F35138', '#CC1FCB', '#FFB040', '#FF5A59', '#33FFE1', '#FF6F33', '#FF8873'
+// '#FF6F33', '#FF8873','#33FFE1', '#FF6F33'
 
 const colors = [
   '#FF4040', '#5BCC1F', '#40B5FF', '#B273FF', 
-  '#FF8873', '#2EE5CA'
+  '#FF8873', '#2EE5CA', '#FFB040', '#F35138', 
+  '#CC1FCB', '#FF5A59'
 ];
 const body = document.getElementsByTagName('body')[0];
 const buttons = document.getElementsByTagName('button');
