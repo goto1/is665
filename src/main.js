@@ -23,20 +23,35 @@ Pagination.prototype.prevPage = function() {
   }
 }
 
-// '#FF6F33', '#FF8873','#33FFE1', '#FF6F33'
-
-const colors = [
-  '#FF4040', '#5BCC1F', '#40B5FF', '#B273FF', 
-  '#FF8873', '#2EE5CA', '#FFB040', '#F35138', 
-  '#CC1FCB', '#FF5A59'
-];
+// '#FF6F33', '#FF8873', '#33FFE1', '#FF6F33'
 const body = document.getElementsByTagName('body')[0];
 const buttons = document.getElementsByTagName('button');
 const dots = document.getElementsByClassName('dots');
 const sections = document.getElementsByTagName('section');
+const colors = getSectionColors(sections);
 const pagination = new Pagination(0, colors.length);
 const nextPageBtn = buttons[1];
 const prevPageBtn = buttons[0];
+
+function getSectionColors() {
+  const colors = [];
+
+  for (let i = 0; i < sections.length; i++) {
+    colors.push(sections[i].id.slice(1));
+  }
+
+  return colors;
+}
+
+function applyBorderBottomToHTags() {
+  for (let i = 0; i < sections.length; i++) {
+    const h2 = sections[i].getElementsByTagName('h2');
+
+    if (h2.length !== 0) {
+      h2[0].style.borderBottom = `3px solid #${colors[i]}`;
+    }
+  }
+}
 
 function showCurrentSection() {
   for (let i = 0; i < pagination.currPage; i++) {
@@ -111,6 +126,7 @@ function init() {
   setActiveDot(pagination.currPage);
   updateNavBtnStyles();
   showCurrentSection();
+  applyBorderBottomToHTags();
 }
 
 init();

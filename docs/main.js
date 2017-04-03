@@ -23,16 +23,35 @@ Pagination.prototype.prevPage = function () {
   }
 };
 
-// '#FF6F33', '#FF8873','#33FFE1', '#FF6F33'
-
-var colors = ['#FF4040', '#5BCC1F', '#40B5FF', '#B273FF', '#FF8873', '#2EE5CA', '#FFB040', '#F35138', '#CC1FCB', '#FF5A59'];
+// '#FF6F33', '#FF8873', '#33FFE1', '#FF6F33'
 var body = document.getElementsByTagName('body')[0];
 var buttons = document.getElementsByTagName('button');
 var dots = document.getElementsByClassName('dots');
 var sections = document.getElementsByTagName('section');
+var colors = getSectionColors(sections);
 var pagination = new Pagination(0, colors.length);
 var nextPageBtn = buttons[1];
 var prevPageBtn = buttons[0];
+
+function getSectionColors() {
+  var colors = [];
+
+  for (var i = 0; i < sections.length; i++) {
+    colors.push(sections[i].id.slice(1));
+  }
+
+  return colors;
+}
+
+function applyBorderBottomToHTags() {
+  for (var i = 0; i < sections.length; i++) {
+    var h2 = sections[i].getElementsByTagName('h2');
+
+    if (h2.length !== 0) {
+      h2[0].style.borderBottom = '3px solid #' + colors[i];
+    }
+  }
+}
 
 function showCurrentSection() {
   for (var i = 0; i < pagination.currPage; i++) {
@@ -110,6 +129,7 @@ function init() {
   setActiveDot(pagination.currPage);
   updateNavBtnStyles();
   showCurrentSection();
+  applyBorderBottomToHTags();
 }
 
 init();
