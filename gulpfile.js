@@ -17,7 +17,7 @@ const paths = {
   src: {
     js: './src/**/*.js',
     sass: './src/**/*.sass',
-    pug: './src/**/*.pug',
+    pug: ['./src/**/*.pug', '!./src/includes/*.pug'],
   },
 };
 

@@ -1,3 +1,5 @@
+include ./includes/mixins.pug
+
 doctype html
 html(lang='en')
   head
@@ -12,214 +14,17 @@ html(lang='en')
       button #[i.fa.fa-arrow-circle-left(aria-hidden='true')]
       button #[i.fa.fa-arrow-circle-right(aria-hidden='true')]
 
-    section#cFF4040
-      .content
-        .title
-          h2 Startup Venture Funding
-        .other
-          h3 Overview
-          p. 
-            #[strong Startup Venture Funding] is a type of equity financing that addresses the funding needs of entrepreneurial companies that for reasons of size, assets, and stage of development cannot seek capital from more traditional sources, such as public markets and banks. Venture capital investments are generally made as cash in exchange for shares and an active role in the invested company.
-          p.
-            Venture capital differs from traditional financing sources in that venture capital typically:
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              Focuses on young, high-growth companies
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              Invests equity capital, rather than debt
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              Takes higher risks in exchange for potential higher returns
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              Has a longer investment horizon than traditional financing
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              Actively monitors portfolio companies via board participation, strategic marketing, governance, and capital structure
-    section#c5BCC1F
-      .content
-        .title 
-          h2 Startup Venture Funding Dataset
-        .other
-          h3 Dataset
-          p.
-            The dataset we've selected is the #[strong Startup Venture Funding] from the #[strong Tableau] website. It includes information about startup companies and data related to #[strong investments], 
-            #[strong acquisitions], and #[strong rounds]. 
-          p. 
-            This dataset comes from the #[strong Crunchbase], which is a database that provides information on latest industry trends, investment insights, and rich company data. It was collected over the period of #[strong 7 years], from #[strong 2007] to #[strong 2014].
-          h3 Questions
-          p.
-            We are interested in answering the following questions...
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong Where investors are spending the most on startups?]
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong Which regions generate the greatest/lowest levels of startup funding by round? First, second, third?]
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong Which industries generate the greatest/lowest levels of startup funding? Pharma? Analytics? Etc.?]
+    include includes/section1
+    include includes/section2
+    include includes/section3
+    include includes/section4
+    include includes/section5
+    include includes/section6
+    include includes/section7
+    include includes/section8
+    include includes/section9
+    include includes/section10
 
-    section#c40B5FF
-      iframe(src='https://public.tableau.com/views/Whereinvestorsarespendingthemostonstartups-Dashboard/TotalAmountofFundsRaisedbyState-Dashboard?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:tabs=no&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&:loadOrderID=0')
-
-    section#cB273FF
-      .content
-        .title 
-          h2 Initial Findings
-        .other
-          h3 Why Only US?
-          p. 
-            #[strong US] is dominating with a total of #[strong $428.48B] raised in funding. The #[strong second] is #[strong China] with #[strong $32.4B] and #[strong third United Kingdom] with #[strong $21.5B].
-          h3 Top 3 Areas in US
-          p. 
-            At a firts glance, we've been able to determine that #[strong California], #[strong New York], and #[strong Massachusetts] are the #[strong top 3 areas] in #[strong US] that had the #[strong higest total funding] over those #[strong 7 years].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong California] - #[strong $162.4B], or #[strong 37.9%], in #[strong total funding], 
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong New York] - #[strong $65B], or #[strong 15.1%], in #[strong total funding]
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong Massachusetts] - #[strong $35.5B], or #[strong 8.3%], in #[strong total funding]
-          p.
-            Overall, these #[strong top 3 areas] have been responsible for #[strong 61.4%], or #[strong $262.9B], of the #[strong total amount of funding] in #[strong US].
-          h3 What About New Jersey?
-          p.
-            #[strong New Jersey] comes in at the #[strong 13th] place in the country.
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong New Jersey] - #[strong $7.2B], or #[strong 1.7%], in #[strong total funding]
-    
-    section#cFF8873
-      iframe(src='https://public.tableau.com/views/TotalFundinginTop3RegionsOverTime-Dashboard/Dashboard4?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:tabs=no&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&:loadOrderID=0')
-
-    section#c2EE5CA
-      .content
-        .title 
-          h2 Top 3 Regions & New Jersey
-        .other
-          h3 Top 3 From 2007 To 2014
-          p.
-            Over the those #[strong 7 years], #[strong California] has been dominating in the amount of total funding raised.
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong California] claimed the most amount of money in #[strong 2014], around #[strong $35.9B]
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong New York] claimed the most amount of money in #[strong 2014], around #[strong $30.1B]
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong Massachusetts] claimed the most amount of money in #[strong 2014], around #[strong $7.5B]
-          h3 New Jersey
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong New Jersey] claimed the most amount of money in #[strong 2013], around #[strong $1.4B]
-
-    section#cFFB040
-      iframe.show-controls(src='https://public.tableau.com/views/Whatisthebesttimetolookforjobs-Dashboard/Dashboard3?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:tabs=no&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=no&:loadOrderID=0')
-
-    section#cF35138
-      .content
-        .title 
-          h2 The best time to look for jobs
-        .other
-          h3 Observations
-          p.
-            In general, you are more likely to get a job during the #[strong first three months] of the year. However, this varies by region.
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              In #[strong California], the funding is somewhat consistent throughout the year, with only a slight advantage in months of #[strong January], #[strong June], and #[strong Sepetember].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              #[strong New York], on the other hand is pretty "busy" in the months of #[strong February], and #[strong March].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              In #[strong Massachussets], is pretty consistent with only a slight peak during the month of #[strong January].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              Lastly, #[strong New Jersey], are seeing a slight advantage in the months of #[strong May], and #[strong September]. Other than that, it's pretty consistent throughout the year.
-
-    section#cCC1FCB
-      iframe.show-controls(src='https://public.tableau.com/views/TopMarketsbyRegions-Dashboard/TopMarketsbyRegion?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:tabs=no&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&:loadOrderID=0')
-
-    section#cFF5A59
-      .content
-        .title 
-          h2 Top Markets by Region
-        .other
-          h3 Observations
-          p.
-            Overall, the #[strong top 5] markets include #[strong biotechnology], #[strong clean technology], #[strong health care], #[strong mobile], and #[strong software].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              In #[strong California], the #[strong top 3] markets are #[strong biotechnology], #[strong clean technology], and #[strong software].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              In #[strong New York], the #[strong top 3] markets are #[strong mobile], #[strong biotechnology], as well as #[strong health and wellness].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              In #[strong California], the #[strong top 3] markets are #[strong biotechnology], #[strong clean technology], and #[strong software].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              In #[strong Massachussets], the #[strong top 3] markets are #[strong biotechnology], #[strong clean technology], and #[strong healt care].
-          .list-item
-            .bullet
-              i.fa.fa-long-arrow-right(aria-hidden='true')
-            .content.
-              Lastly, in #[strong New Jersey], the #[strong top 3] markets are #[strong biotechnology], #[strong health care], and #[strong web hosting].
-          p.
-            Interestingly, #[strong analytics] was in the #[strong 9th] place in terms of "popularity."
     .dots
 
     script(src='main.js')
