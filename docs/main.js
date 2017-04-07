@@ -37,7 +37,7 @@ var createNavDotsForEachSection = function createNavDotsForEachSection(body, sec
   var dots = document.getElementsByClassName('dots')[0];
   var sectionKeys = Object.keys(sections);
   var numOfSections = sectionKeys.filter(function (val) {
-    return val.length > 1;
+    return val.length > 2;
   });
 
   numOfSections.forEach(function (item, idx) {
@@ -102,7 +102,7 @@ var applyBorderToHeadings = function applyBorderToHeadings(sections) {
 var getColorsOfEachSection = function getColorsOfEachSection(sections) {
   var ids = Object.keys(sections);
   var hexValues = ids.filter(function (val) {
-    return val.length > 1;
+    return val.length > 2;
   });
   var colors = hexValues.map(function (hex) {
     return hex.slice(1);
@@ -121,9 +121,9 @@ var addAnimationToInfoTips = function addAnimationToInfoTips() {
     var text = details.childNodes[0];
 
     icon.onmouseenter = function () {
-      text.style.transitionDelay = '450ms';
       details.style.opacity = '1';
       details.style.maxWidth = '700px';
+      text.style.transitionDelay = '450ms';
       text.style.opacity = '1';
     };
 
@@ -143,7 +143,7 @@ function initialize() {
   var navDots = document.getElementsByClassName('dots');
   var prevBtn = document.getElementsByTagName('button')[0];
   var nextBtn = document.getElementsByTagName('button')[1];
-  var pagination = new Pagination(2, sections.length);
+  var pagination = new Pagination(0, sections.length);
   var colors = getColorsOfEachSection(sections);
   var colorsWithHashes = colors.map(function (color) {
     return '#' + color;

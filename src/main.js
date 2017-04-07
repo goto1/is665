@@ -36,7 +36,7 @@ const setBackgroundColor = (body, color) => {
 const createNavDotsForEachSection = (body, sections, colors, pagination, nextBtn, prevBtn) => {
   const dots = document.getElementsByClassName('dots')[0];
   const sectionKeys = Object.keys(sections);
-  const numOfSections = sectionKeys.filter(val => val.length > 1);
+  const numOfSections = sectionKeys.filter(val => val.length > 2);
 
   numOfSections.forEach((item, idx) => {
     const dot = document.createElement('div');
@@ -99,7 +99,7 @@ const applyBorderToHeadings = (sections) => {
 
 const getColorsOfEachSection = (sections) => {
   const ids = Object.keys(sections);
-  const hexValues = ids.filter(val => val.length > 1);
+  const hexValues = ids.filter(val => val.length > 2);
   const colors = hexValues.map(hex => hex.slice(1));
   
   return colors;
@@ -115,9 +115,9 @@ const addAnimationToInfoTips = () => {
     const text = details.childNodes[0];
 
     icon.onmouseenter = () => {
-      text.style.transitionDelay = '450ms';
       details.style.opacity = '1';
       details.style.maxWidth = '700px';
+      text.style.transitionDelay = '450ms';
       text.style.opacity = '1';
     };
 
@@ -137,7 +137,7 @@ function initialize() {
   const navDots = document.getElementsByClassName('dots');
   const prevBtn = document.getElementsByTagName('button')[0];
   const nextBtn = document.getElementsByTagName('button')[1];
-  const pagination = new Pagination(2, sections.length);
+  const pagination = new Pagination(0, sections.length);
   const colors = getColorsOfEachSection(sections);
   const colorsWithHashes = colors.map(color => `#${color}`);
 
