@@ -12,6 +12,29 @@ body
   font-family: 'Roboto', sans-serif
   min-width: 900px
 
+.infotip
+  i
+    position: absolute
+    font-size: 45px
+    right: 10px
+    top: 5px
+    z-index: 1
+
+  .info
+    position: absolute
+    font-size: 29px
+    background: #DFF0D8
+    width: 98%
+    right: 10px
+    top: 8px
+    border-radius: 500px
+    padding-left: 15px
+    border: 1px solid black
+    text-align: center
+    padding: 2.5px 0
+    opacity: 0
+    transition: all 500ms ease-in-out
+
 section
   width: 900px
   height: 570px
@@ -21,6 +44,7 @@ section
   opacity: 0
   border-radius: 2px
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+  position: relative
 .move-to-left
   position: absolute
   transform: translateX(-125%)
@@ -31,28 +55,6 @@ section
   transform: translateX(0)
   opacity: 1
 
-
-// #sec1
-//   h2
-    // border-bottom: 3px solid #FF4040
-// #sec2
-//   h2
-//     border-bottom: 3px solid #5BCC1F
-// #sec4
-//   h2
-//     border-bottom: 3px solid #B273FF
-// #sec5
-//   h2
-//     border-bottom: 3px solid #FF8873
-// #sec6
-//   h2
-//     border-bottom: 3px solid #2EE5CA
-// #sec7
-//   h2
-//     border-bottom: 3px solid #F35138
-// #sec8
-//   h2
-//     border-bottom: 3px solid #FF5A59
 
 iframe
   width: 100%

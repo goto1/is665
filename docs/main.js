@@ -23,114 +23,144 @@ Pagination.prototype.prevPage = function () {
   }
 };
 
-// '#FF6F33', '#FF8873', '#33FFE1', '#FF6F33'
-var body = document.getElementsByTagName('body')[0];
-var buttons = document.getElementsByTagName('button');
-var dots = document.getElementsByClassName('dots');
-var sections = document.getElementsByTagName('section');
-var colors = getSectionColors(sections);
-var pagination = new Pagination(0, colors.length);
-var nextPageBtn = buttons[1];
-var prevPageBtn = buttons[0];
-
-function getSectionColors() {
-  var colors = [];
-
-  for (var i = 0; i < sections.length; i++) {
-    colors.push(sections[i].id.slice(1));
-  }
-
-  return colors;
-}
-
-function applyBorderBottomToHTags() {
-  for (var i = 0; i < sections.length; i++) {
-    var h2 = sections[i].getElementsByTagName('h2');
-
-    if (h2.length !== 0) {
-      h2[0].style.borderBottom = '3px solid #' + colors[i];
-    }
-  }
-}
-
-function showCurrentSection() {
-  for (var i = 0; i < pagination.currPage; i++) {
-    sections[i].className = 'move-to-left';
-  }
-  for (var _i = pagination.currPage + 1; _i < sections.length; _i++) {
-    sections[_i].className = 'move-to-right';
-  }
-  sections[pagination.currPage].className = 'active';
-}
-
-nextPageBtn.onclick = function () {
-  pagination.nextPage();
-  setBodyBgColorTo(colors[pagination.currPage]);
-  updateUI();
+var updateUIComponents = function updateUIComponents(sections, pagination, nextBtn, prevBtn) {
+  setCurrentlyActiveDot(pagination.currPage);
+  updateNavigationButtons(nextBtn, prevBtn, pagination);
+  displayCurrentSection(sections, pagination);
 };
 
-prevPageBtn.onclick = function () {
-  pagination.prevPage();
-  setBodyBgColorTo(colors[pagination.currPage]);
-  updateUI();
+var setBackgroundColor = function setBackgroundColor(body, color) {
+  body.bgColor = color;
 };
 
-function createNavDots() {
+var createNavDotsForEachSection = function createNavDotsForEachSection(sections, colors, pagination) {
   var dots = document.getElementsByClassName('dots')[0];
+  var sectionKeys = Object.keys(sections);
+  var numOfSections = sectionKeys.filter(function (val) {
+    return val.length > 1;
+  });
 
-  var _loop = function _loop(i) {
+  numOfSections.forEach(function () {
     var dot = document.createElement('div');
     dot.className = 'dot';
     dot.onclick = function () {
-      setBodyBgColorTo(colors[i]);
+      setBackgroundColorTo(colors[i]);
       pagination.currPage = i;
-      updateUI();
+      updateUIComponents(sections, pagination, nextBtn, prevBtn);
     };
     dots.append(dot);
+  });
+};
+
+var setCurrentlyActiveDot = function setCurrentlyActiveDot(currentPage) {
+  var dots = document.getElementsByClassName('dots')[0].childNodes;
+  var dotKeys = Object.keys(dots);
+
+  dotKeys.forEach(function (id) {
+    dots[+id].className = 'dot';
+  });
+  dots[currentPage].className = 'dot active';
+};
+
+var updateNavigationButtons = function updateNavigationButtons(nextBtn, prevBtn, pagination) {
+  nextBtn.className = '';
+  prevBtn.className = '';
+
+  if (!pagination.hasPrev()) {
+    prevBtn.className = 'btn-not-active';
+  }
+
+  if (!pagination.hasNext()) {
+    nextBtn.className = 'btn-not-active';
+  }
+};
+
+var displayCurrentSection = function displayCurrentSection(sections, pagination) {
+  for (var _i = 0; _i < pagination.currPage; _i++) {
+    sections[_i].className = 'move-to-left';
+  }
+
+  for (var _i2 = pagination.currPage + 1; _i2 < sections.length; _i2++) {
+    sections[_i2].className = 'move-to-right';
+  }
+
+  sections[pagination.currPage].className = 'active';
+};
+
+var applyBorderToHeadings = function applyBorderToHeadings(sections) {
+  var colors = getColorsOfEachSection(sections);
+
+  for (var _i3 = 0; _i3 < sections.length; _i3++) {
+    var heading = sections[_i3].getElementsByTagName('h2');
+
+    if (heading.length !== 0) {
+      heading[0].style.borderBottom = '3px solid #' + colors[_i3];
+    }
+  }
+};
+
+var getColorsOfEachSection = function getColorsOfEachSection(sections) {
+  var ids = Object.keys(sections);
+  var hexValues = ids.filter(function (val) {
+    return val.length > 1;
+  });
+  var colors = hexValues.map(function (hex) {
+    return hex.slice(1);
+  });
+
+  return colors;
+};
+
+function initialize() {
+  var body = document.getElementsByTagName('body')[0];
+  var sections = document.getElementsByTagName('section');
+  var navDots = document.getElementsByClassName('dots');
+  var prevBtn = document.getElementsByTagName('button')[0];
+  var nextBtn = document.getElementsByTagName('button')[1];
+  var colors = getColorsOfEachSection(sections);
+  var pagination = new Pagination(0, sections.length);
+
+  setBackgroundColor(body, colors[pagination.currPage]);
+  createNavDotsForEachSection(sections, colors, pagination);
+  setCurrentlyActiveDot(pagination.currPage);
+  updateNavigationButtons(nextBtn, prevBtn, pagination);
+  displayCurrentSection(sections, pagination);
+  applyBorderToHeadings(sections);
+
+  nextBtn.onclick = function () {
+    pagination.nextPage();
+    setBackgroundColor(body, colors[pagination.currPage]);
+    updateUIComponents(sections, pagination, nextBtn, prevBtn);
   };
 
-  for (var i = 0; i < sections.length; i++) {
-    _loop(i);
-  }
+  prevBtn.onclick = function () {
+    pagination.prevPage();
+    setBackgroundColor(body, colors[pagination.currPage]);
+    updateUIComponents(sections, pagination, nextBtn, prevBtn);
+  };
 }
 
-function setActiveDot(currPage) {
-  var dots = document.getElementsByClassName('dots')[0].childNodes;
-  for (var i = 0; i < dots.length; i++) {
-    dots[i].className = 'dot';
-  }
-  dots[currPage].className = 'dot active';
-}
+initialize();
 
-function setBodyBgColorTo(color) {
-  body.bgColor = color;
-}
+// function init() {
+//   setBodyBgColorTo(colors[pagination.currPage]);
+//   createNavDots();
+//   setActiveDot(pagination.currPage);
+//   updateNavBtnStyles();
+//   showCurrentSection();
+//   applyBorderBottomToHTags();
 
-function updateNavBtnStyles() {
-  nextPageBtn.className = '';
-  prevPageBtn.className = '';
-  if (!pagination.hasPrev()) {
-    prevPageBtn.className = 'btn-not-active';
-  }
-  if (!pagination.hasNext()) {
-    nextPageBtn.className = 'btn-not-active';
-  }
-}
+//   const infotips = document.getElementsByClassName('infotip')
+//   const icon = infotips[0].childNodes[0];
+//   const details = infotips[0].childNodes[1];
 
-function updateUI() {
-  setActiveDot(pagination.currPage);
-  updateNavBtnStyles();
-  showCurrentSection();
-}
+//   icon.onmouseenter = () => {
+//     details.style.opacity = '1';
+//   }
+//   icon.onmouseleave = () => {
+//     details.style.opacity = '0';
+//   }
+// }
 
-function init() {
-  setBodyBgColorTo(colors[pagination.currPage]);
-  createNavDots();
-  setActiveDot(pagination.currPage);
-  updateNavBtnStyles();
-  showCurrentSection();
-  applyBorderBottomToHTags();
-}
-
-init();
+// init();
 //# sourceMappingURL=main.js.map

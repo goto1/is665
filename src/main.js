@@ -23,110 +23,138 @@ Pagination.prototype.prevPage = function() {
   }
 }
 
-// '#FF6F33', '#FF8873', '#33FFE1', '#FF6F33'
-const body = document.getElementsByTagName('body')[0];
-const buttons = document.getElementsByTagName('button');
-const dots = document.getElementsByClassName('dots');
-const sections = document.getElementsByTagName('section');
-const colors = getSectionColors(sections);
-const pagination = new Pagination(0, colors.length);
-const nextPageBtn = buttons[1];
-const prevPageBtn = buttons[0];
-
-function getSectionColors() {
-  const colors = [];
-
-  for (let i = 0; i < sections.length; i++) {
-    colors.push(sections[i].id.slice(1));
-  }
-
-  return colors;
-}
-
-function applyBorderBottomToHTags() {
-  for (let i = 0; i < sections.length; i++) {
-    const h2 = sections[i].getElementsByTagName('h2');
-
-    if (h2.length !== 0) {
-      h2[0].style.borderBottom = `3px solid #${colors[i]}`;
-    }
-  }
-}
-
-function showCurrentSection() {
-  for (let i = 0; i < pagination.currPage; i++) {
-    sections[i].className = 'move-to-left';
-  }
-  for (let i = pagination.currPage + 1; i < sections.length; i++) {
-    sections[i].className = 'move-to-right';
-  }
-  sections[pagination.currPage].className = 'active';
-}
-
-nextPageBtn.onclick = () => {
-  pagination.nextPage();
-  setBodyBgColorTo(colors[pagination.currPage]);
-  updateUI();
+const updateUIComponents = (sections, pagination, nextBtn, prevBtn) => {
+  setCurrentlyActiveDot(pagination.currPage);
+  updateNavigationButtons(nextBtn, prevBtn, pagination);
+  displayCurrentSection(sections, pagination);
 };
 
-prevPageBtn.onclick = () => {
-  pagination.prevPage();
-  setBodyBgColorTo(colors[pagination.currPage]);
-  updateUI();
+const setBackgroundColor = (body, color) => {
+  body.bgColor = color;
 };
 
-function createNavDots() {
+const createNavDotsForEachSection = (sections, colors, pagination) => {
   const dots = document.getElementsByClassName('dots')[0];
+  const sectionKeys = Object.keys(sections);
+  const numOfSections = sectionKeys.filter(val => val.length > 1);
 
-  for (let i = 0; i < sections.length; i++) {
+  numOfSections.forEach(() => {
     const dot = document.createElement('div');
     dot.className = 'dot';
     dot.onclick = () => {
-      setBodyBgColorTo(colors[i]);
+      setBackgroundColorTo(colors[i]);
       pagination.currPage = i;
-      updateUI();
-    }
+      updateUIComponents(sections, pagination, nextBtn, prevBtn);
+    };
     dots.append(dot);
-  }
+  });
 }
 
-function setActiveDot(currPage) {
+const setCurrentlyActiveDot = (currentPage) => {
   const dots = document.getElementsByClassName('dots')[0].childNodes;
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].className = 'dot';
-  }
-  dots[currPage].className = 'dot active';
+  const dotKeys = Object.keys(dots);
 
+  dotKeys.forEach((id) => {
+    dots[+id].className = 'dot';
+  });
+  dots[currentPage].className = 'dot active';
 }
 
-function setBodyBgColorTo(color) {
-  body.bgColor = color;
-}
+const updateNavigationButtons = (nextBtn, prevBtn, pagination) => {
+  nextBtn.className = '';
+  prevBtn.className = '';
 
-function updateNavBtnStyles() {
-  nextPageBtn.className = '';
-  prevPageBtn.className = '';
   if (!pagination.hasPrev()) {
-    prevPageBtn.className = 'btn-not-active';
+    prevBtn.className = 'btn-not-active';
   }
+
   if (!pagination.hasNext()) {
-    nextPageBtn.className = 'btn-not-active';
+    nextBtn.className = 'btn-not-active';
   }
 }
 
-function updateUI() {
-  setActiveDot(pagination.currPage);
-  updateNavBtnStyles();
-  showCurrentSection();
+const displayCurrentSection = (sections, pagination) => {
+  for (let i = 0; i < pagination.currPage; i++) {
+    sections[i].className = 'move-to-left';
+  }
+
+  for (let i = pagination.currPage + 1; i < sections.length; i++) {
+    sections[i].className = 'move-to-right';
+  }
+
+  sections[pagination.currPage].className = 'active';
 }
 
-function init() {
-  setBodyBgColorTo(colors[pagination.currPage]);
-  createNavDots();
-  setActiveDot(pagination.currPage);
-  updateNavBtnStyles();
-  showCurrentSection();
-  applyBorderBottomToHTags();
+const applyBorderToHeadings = (sections) => {
+  const colors = getColorsOfEachSection(sections);
+
+  for (let i = 0; i < sections.length; i++) {
+    const heading = sections[i].getElementsByTagName('h2');
+
+    if (heading.length !== 0) {
+      heading[0].style.borderBottom = `3px solid #${colors[i]}`;
+    }
+  }
 }
 
-init();
+const getColorsOfEachSection = (sections) => {
+  const ids = Object.keys(sections);
+  const hexValues = ids.filter(val => val.length > 1);
+  const colors = hexValues.map(hex => hex.slice(1));
+  
+  return colors;
+}
+
+
+function initialize() {
+  const body = document.getElementsByTagName('body')[0];
+  const sections = document.getElementsByTagName('section');
+  const navDots = document.getElementsByClassName('dots');
+  const prevBtn = document.getElementsByTagName('button')[0];
+  const nextBtn = document.getElementsByTagName('button')[1];
+  const colors = getColorsOfEachSection(sections);
+  const pagination = new Pagination(0, sections.length);
+
+  setBackgroundColor(body, colors[pagination.currPage]);
+  createNavDotsForEachSection(sections, colors, pagination);
+  setCurrentlyActiveDot(pagination.currPage);
+  updateNavigationButtons(nextBtn, prevBtn, pagination);
+  displayCurrentSection(sections, pagination);
+  applyBorderToHeadings(sections);
+
+  nextBtn.onclick = () => {
+    pagination.nextPage();
+    setBackgroundColor(body, colors[pagination.currPage]);
+    updateUIComponents(sections, pagination, nextBtn, prevBtn);
+  }
+
+  prevBtn.onclick = () => {
+    pagination.prevPage();
+    setBackgroundColor(body, colors[pagination.currPage]);
+    updateUIComponents(sections, pagination, nextBtn, prevBtn);
+  }
+}
+
+initialize();
+
+// function init() {
+//   setBodyBgColorTo(colors[pagination.currPage]);
+//   createNavDots();
+//   setActiveDot(pagination.currPage);
+//   updateNavBtnStyles();
+//   showCurrentSection();
+//   applyBorderBottomToHTags();
+
+//   const infotips = document.getElementsByClassName('infotip')
+//   const icon = infotips[0].childNodes[0];
+//   const details = infotips[0].childNodes[1];
+
+//   icon.onmouseenter = () => {
+//     details.style.opacity = '1';
+//   }
+//   icon.onmouseleave = () => {
+//     details.style.opacity = '0';
+//   }
+// }
+
+// init();
