@@ -105,6 +105,23 @@ const getColorsOfEachSection = (sections) => {
   return colors;
 }
 
+const addAnimationToInfoTips = () => {
+  const infoTips = document.getElementsByClassName('infotip');
+  const itKeys = Object.keys(infoTips)
+
+  itKeys.forEach((val) => {
+    const icon = infoTips[+val].childNodes[0];
+    const details = infoTips[+val].childNodes[1];
+
+    icon.onmouseenter = () => {
+      details.style.opacity = '1';
+    };
+
+    icon.onmouseleave = () => {
+      details.style.opacity = '0';
+    }
+  });
+}
 
 function initialize() {
   const body = document.getElementsByTagName('body')[0];
@@ -121,6 +138,7 @@ function initialize() {
   updateNavigationButtons(nextBtn, prevBtn, pagination);
   displayCurrentSection(sections, pagination);
   applyBorderToHeadings(sections);
+  addAnimationToInfoTips();
 
   nextBtn.onclick = () => {
     pagination.nextPage();
@@ -136,25 +154,3 @@ function initialize() {
 }
 
 initialize();
-
-// function init() {
-//   setBodyBgColorTo(colors[pagination.currPage]);
-//   createNavDots();
-//   setActiveDot(pagination.currPage);
-//   updateNavBtnStyles();
-//   showCurrentSection();
-//   applyBorderBottomToHTags();
-
-//   const infotips = document.getElementsByClassName('infotip')
-//   const icon = infotips[0].childNodes[0];
-//   const details = infotips[0].childNodes[1];
-
-//   icon.onmouseenter = () => {
-//     details.style.opacity = '1';
-//   }
-//   icon.onmouseleave = () => {
-//     details.style.opacity = '0';
-//   }
-// }
-
-// init();
