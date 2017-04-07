@@ -2,9 +2,10 @@ mixin bpoint(text)
 	.list-item
 		.bullet
 			i.fa.fa-long-arrow-right(aria-hidde='true')
-		.content= text
+		.content!= text
 
 mixin tooltip(text)
 	.infotip
 		i.fa.fa-info-circle(aria-hidden='true')
-		.info= text
+		.info
+			span= text

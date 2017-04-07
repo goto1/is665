@@ -112,13 +112,21 @@ const addAnimationToInfoTips = () => {
   itKeys.forEach((val) => {
     const icon = infoTips[+val].childNodes[0];
     const details = infoTips[+val].childNodes[1];
+    const text = details.childNodes[0];
 
     icon.onmouseenter = () => {
+      text.style.transitionDelay = '450ms';
       details.style.opacity = '1';
+      details.style.maxWidth = '700px';
+      text.style.opacity = '1';
     };
 
     icon.onmouseleave = () => {
       details.style.opacity = '0';
+      details.style.maxWidth = '0px';
+      text.style.transitionDelay = '0ms';
+      text.style.transitionDuration = '100ms';
+      text.style.opacity = '0';
     }
   });
 }
@@ -129,7 +137,7 @@ function initialize() {
   const navDots = document.getElementsByClassName('dots');
   const prevBtn = document.getElementsByTagName('button')[0];
   const nextBtn = document.getElementsByTagName('button')[1];
-  const pagination = new Pagination(0, sections.length);
+  const pagination = new Pagination(2, sections.length);
   const colors = getColorsOfEachSection(sections);
   const colorsWithHashes = colors.map(color => `#${color}`);
 

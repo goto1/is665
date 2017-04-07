@@ -118,13 +118,21 @@ var addAnimationToInfoTips = function addAnimationToInfoTips() {
   itKeys.forEach(function (val) {
     var icon = infoTips[+val].childNodes[0];
     var details = infoTips[+val].childNodes[1];
+    var text = details.childNodes[0];
 
     icon.onmouseenter = function () {
+      text.style.transitionDelay = '450ms';
       details.style.opacity = '1';
+      details.style.maxWidth = '700px';
+      text.style.opacity = '1';
     };
 
     icon.onmouseleave = function () {
       details.style.opacity = '0';
+      details.style.maxWidth = '0px';
+      text.style.transitionDelay = '0ms';
+      text.style.transitionDuration = '100ms';
+      text.style.opacity = '0';
     };
   });
 };
@@ -135,7 +143,7 @@ function initialize() {
   var navDots = document.getElementsByClassName('dots');
   var prevBtn = document.getElementsByTagName('button')[0];
   var nextBtn = document.getElementsByTagName('button')[1];
-  var pagination = new Pagination(0, sections.length);
+  var pagination = new Pagination(2, sections.length);
   var colors = getColorsOfEachSection(sections);
   var colorsWithHashes = colors.map(function (color) {
     return '#' + color;
