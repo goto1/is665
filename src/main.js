@@ -33,17 +33,17 @@ const setBackgroundColor = (body, color) => {
   body.bgColor = color;
 };
 
-const createNavDotsForEachSection = (sections, colors, pagination) => {
+const createNavDotsForEachSection = (body, sections, colors, pagination, nextBtn, prevBtn) => {
   const dots = document.getElementsByClassName('dots')[0];
   const sectionKeys = Object.keys(sections);
   const numOfSections = sectionKeys.filter(val => val.length > 1);
 
-  numOfSections.forEach(() => {
+  numOfSections.forEach((item, idx) => {
     const dot = document.createElement('div');
     dot.className = 'dot';
     dot.onclick = () => {
-      setBackgroundColorTo(colors[i]);
-      pagination.currPage = i;
+      setBackgroundColor(body, colors[idx]);
+      pagination.currPage = idx;
       updateUIComponents(sections, pagination, nextBtn, prevBtn);
     };
     dots.append(dot);
@@ -129,11 +129,12 @@ function initialize() {
   const navDots = document.getElementsByClassName('dots');
   const prevBtn = document.getElementsByTagName('button')[0];
   const nextBtn = document.getElementsByTagName('button')[1];
-  const colors = getColorsOfEachSection(sections);
   const pagination = new Pagination(0, sections.length);
+  const colors = getColorsOfEachSection(sections);
+  const colorsWithHashes = colors.map(color => `#${color}`);
 
-  setBackgroundColor(body, colors[pagination.currPage]);
-  createNavDotsForEachSection(sections, colors, pagination);
+  setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
+  createNavDotsForEachSection(body, sections, colorsWithHashes, pagination, nextBtn, prevBtn);
   setCurrentlyActiveDot(pagination.currPage);
   updateNavigationButtons(nextBtn, prevBtn, pagination);
   displayCurrentSection(sections, pagination);
@@ -142,13 +143,13 @@ function initialize() {
 
   nextBtn.onclick = () => {
     pagination.nextPage();
-    setBackgroundColor(body, colors[pagination.currPage]);
+    setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
     updateUIComponents(sections, pagination, nextBtn, prevBtn);
   }
 
   prevBtn.onclick = () => {
     pagination.prevPage();
-    setBackgroundColor(body, colors[pagination.currPage]);
+    setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
     updateUIComponents(sections, pagination, nextBtn, prevBtn);
   }
 }

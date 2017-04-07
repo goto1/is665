@@ -33,19 +33,19 @@ var setBackgroundColor = function setBackgroundColor(body, color) {
   body.bgColor = color;
 };
 
-var createNavDotsForEachSection = function createNavDotsForEachSection(sections, colors, pagination) {
+var createNavDotsForEachSection = function createNavDotsForEachSection(body, sections, colors, pagination, nextBtn, prevBtn) {
   var dots = document.getElementsByClassName('dots')[0];
   var sectionKeys = Object.keys(sections);
   var numOfSections = sectionKeys.filter(function (val) {
     return val.length > 1;
   });
 
-  numOfSections.forEach(function () {
+  numOfSections.forEach(function (item, idx) {
     var dot = document.createElement('div');
     dot.className = 'dot';
     dot.onclick = function () {
-      setBackgroundColorTo(colors[i]);
-      pagination.currPage = i;
+      setBackgroundColor(body, colors[idx]);
+      pagination.currPage = idx;
       updateUIComponents(sections, pagination, nextBtn, prevBtn);
     };
     dots.append(dot);
@@ -76,12 +76,12 @@ var updateNavigationButtons = function updateNavigationButtons(nextBtn, prevBtn,
 };
 
 var displayCurrentSection = function displayCurrentSection(sections, pagination) {
-  for (var _i = 0; _i < pagination.currPage; _i++) {
-    sections[_i].className = 'move-to-left';
+  for (var i = 0; i < pagination.currPage; i++) {
+    sections[i].className = 'move-to-left';
   }
 
-  for (var _i2 = pagination.currPage + 1; _i2 < sections.length; _i2++) {
-    sections[_i2].className = 'move-to-right';
+  for (var _i = pagination.currPage + 1; _i < sections.length; _i++) {
+    sections[_i].className = 'move-to-right';
   }
 
   sections[pagination.currPage].className = 'active';
@@ -90,11 +90,11 @@ var displayCurrentSection = function displayCurrentSection(sections, pagination)
 var applyBorderToHeadings = function applyBorderToHeadings(sections) {
   var colors = getColorsOfEachSection(sections);
 
-  for (var _i3 = 0; _i3 < sections.length; _i3++) {
-    var heading = sections[_i3].getElementsByTagName('h2');
+  for (var i = 0; i < sections.length; i++) {
+    var heading = sections[i].getElementsByTagName('h2');
 
     if (heading.length !== 0) {
-      heading[0].style.borderBottom = '3px solid #' + colors[_i3];
+      heading[0].style.borderBottom = '3px solid #' + colors[i];
     }
   }
 };
@@ -135,11 +135,14 @@ function initialize() {
   var navDots = document.getElementsByClassName('dots');
   var prevBtn = document.getElementsByTagName('button')[0];
   var nextBtn = document.getElementsByTagName('button')[1];
-  var colors = getColorsOfEachSection(sections);
   var pagination = new Pagination(0, sections.length);
+  var colors = getColorsOfEachSection(sections);
+  var colorsWithHashes = colors.map(function (color) {
+    return '#' + color;
+  });
 
-  setBackgroundColor(body, colors[pagination.currPage]);
-  createNavDotsForEachSection(sections, colors, pagination);
+  setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
+  createNavDotsForEachSection(body, sections, colorsWithHashes, pagination, nextBtn, prevBtn);
   setCurrentlyActiveDot(pagination.currPage);
   updateNavigationButtons(nextBtn, prevBtn, pagination);
   displayCurrentSection(sections, pagination);
@@ -148,13 +151,13 @@ function initialize() {
 
   nextBtn.onclick = function () {
     pagination.nextPage();
-    setBackgroundColor(body, colors[pagination.currPage]);
+    setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
     updateUIComponents(sections, pagination, nextBtn, prevBtn);
   };
 
   prevBtn.onclick = function () {
     pagination.prevPage();
-    setBackgroundColor(body, colors[pagination.currPage]);
+    setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
     updateUIComponents(sections, pagination, nextBtn, prevBtn);
   };
 }
