@@ -1,7 +1,7 @@
 @import 'normalize.css'
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500')
 
-body 
+body
   transition: all .5s ease-in-out
   position: relative
   height: 100vh
@@ -18,8 +18,8 @@ body
     font-size: 50px
     right: 5px
     top: 2px
-    z-index: 1
     color: #717171
+    z-index: 1
 
   .info
     position: absolute
@@ -64,6 +64,31 @@ section
   transform: translateX(0)
   opacity: 1
 
+.slide
+  opacity: 1
+  transition: all 500ms ease-in-out
+  transform: translateY(0)
+  position: absolute
+  height: 99.5%
+  width: 100%
+  z-index: 0
+.slide-inactive
+  opacity: 0
+  transform: translateY(60%)
+i.fa-arrow-left, i.fa-arrow-right
+  position: absolute
+  top: 45%
+  opacity: .4
+  font-size: 35px
+  transition: all 500ms ease-in-out
+  padding: 5px 0
+  &:hover
+    opacity: 1
+    cursor: pointer
+i.fa-arrow-left
+  left: .5%
+i.fa-arrow-right
+  right: .5%
 
 iframe
   width: 100%
@@ -73,7 +98,7 @@ iframe.show-controls
   height: 103.5%
 
 .content
-  padding: 5px 
+  padding: 5px
   height: 97.25%
   letter-spacing: 1.5px
   h2
@@ -86,7 +111,7 @@ iframe.show-controls
     padding: 5px
     overflow-y: scroll
     line-height: 27.5px
-    h3 
+    h3
       margin: 5px 0
       font-size: 1.55em
     p
