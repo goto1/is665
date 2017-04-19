@@ -119,6 +119,7 @@ const addAnimationToInfoTips = () => {
       details.style.maxWidth = '700px';
       text.style.transitionDelay = '450ms';
       text.style.opacity = '1';
+      console.log('onmouseenter');
     };
 
     icon.onmouseleave = () => {
@@ -127,6 +128,7 @@ const addAnimationToInfoTips = () => {
       text.style.transitionDelay = '0ms';
       text.style.transitionDuration = '100ms';
       text.style.opacity = '0';
+      console.log('onmouseleave');
     };
   });
 };

@@ -71,6 +71,7 @@ section
   position: absolute
   height: 100%
   width: 100%
+  z-index: -1
 .slide-inactive
   opacity: 0
   transform: translateY(60%)
@@ -78,11 +79,8 @@ i.fa-arrow-left, i.fa-arrow-right
   position: absolute
   top: 45%
   font-size: 35px
-  transition: all 500ms ease-in-out
   padding: 5px 0
-  &:hover
-    opacity: 1
-    cursor: pointer
+  cursor: pointer
 i.fa-arrow-left
   left: .5%
 i.fa-arrow-right
