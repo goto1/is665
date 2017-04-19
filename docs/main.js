@@ -125,7 +125,6 @@ var addAnimationToInfoTips = function addAnimationToInfoTips() {
       details.style.maxWidth = '700px';
       text.style.transitionDelay = '450ms';
       text.style.opacity = '1';
-      console.log('onmouseenter');
     };
 
     icon.onmouseleave = function () {
@@ -134,7 +133,6 @@ var addAnimationToInfoTips = function addAnimationToInfoTips() {
       text.style.transitionDelay = '0ms';
       text.style.transitionDuration = '100ms';
       text.style.opacity = '0';
-      console.log('onmouseleave');
     };
   });
 };
@@ -177,10 +175,9 @@ var createSlidesInsideSections = function createSlidesInsideSections(sections) {
   });
 
   function toggleSlideNavigation(pagination, lBtn, rBtn, color) {
-    lBtn.style.opacity = '.9';
-    lBtn.style.color = color;
-    rBtn.style.opacity = '.9';
-    rBtn.style.color = color;
+    lBtn.style.opacity = rBtn.style.opacity = '1';
+    lBtn.style.color = rBtn.style.color = color;
+
     if (!pagination.hasPrev()) {
       lBtn.style.opacity = '0';
     }
