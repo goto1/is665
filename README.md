@@ -11,7 +11,6 @@ Teams are expected to find an interesting data set and visualize it using Tablea
 * `Gulp`
 * `Pug`
 * `SASS`
-* `RapidMiner`
 * `Tableau`
 
 ### Link
