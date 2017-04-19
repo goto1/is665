@@ -133,60 +133,64 @@ const addAnimationToInfoTips = () => {
 
 const createSlidesInsideSections = (sections) => {
   const secIDs = Object.keys(sections).filter(id => id.length > 2);
+  const leftBtn = createNavBtn('left');
+  const rightBtn = createNavBtn('right');
 
   secIDs.forEach((id) => {
     const slides = sections[id].getElementsByClassName('slide');
 
     if (slides.length !== 0) {
       const pagination = new Pagination(0, slides.length);
-      const leftBtn = createNavBtn('left');
-      const rightBtn = createNavBtn('right');
+      const color = `#${id.slice(1, id.length)}`;
 
       sections[id].append(leftBtn);
       sections[id].append(rightBtn);
 
       hideInactiveSlides(slides, pagination.currPage);
+      toggleSlideNavigation(pagination, leftBtn, rightBtn, color);
 
       leftBtn.onclick = () => {
         if (pagination.hasPrev()) {
           pagination.prevPage();
           hideInactiveSlides(slides, pagination.currPage);
         }
-        if (!pagination.hasPrev()) {
-          leftBtn.style.opacity = '0';
-        }
+        toggleSlideNavigation(pagination, leftBtn, rightBtn, color);
       };
       rightBtn.onclick = () => {
         if (pagination.hasNext()) {
           pagination.nextPage();
           hideInactiveSlides(slides, pagination.currPage);
         }
-        if (!pagination.hasNext()) {
-          rightBtn.style.opacity = '0';
-        }
+        toggleSlideNavigation(pagination, leftBtn, rightBtn, color);
       };
     }
-
-    function hideInactiveSlides(slides, currSlide) {
-      for (let i = 0; i < slides.length; i++) {
-        if (i !== currSlide) {
-          slides[i].className = 'slide slide-inactive';
-        } else {
-          slides[i].className = 'slide';
-        }
-      }
-    }
-
-    function createNavBtn(direction) {
-      const btn = document.createElement('i');
-      btn.className = `fa fa-arrow-${direction}`;
-
-      return btn;
-    }
-    // console.log(slides);
   });
 
-  // console.log(secIDs);
+  function toggleSlideNavigation(pagination, lBtn, rBtn, color) {
+    lBtn.style.opacity = '.9';
+    lBtn.style.color = color;
+    rBtn.style.opacity = '.9';
+    rBtn.style.color = color;
+    if (!pagination.hasPrev()) { lBtn.style.opacity = '0'; }
+    if (!pagination.hasNext()) { rBtn.style.opacity = '0'; }
+  }
+
+  function hideInactiveSlides(slides, currSlide) {
+    for (let i = 0; i < slides.length; i++) {
+      if (i !== currSlide) {
+        slides[i].className = 'slide slide-inactive';
+      } else {
+        slides[i].className = 'slide';
+      }
+    }
+  }
+
+  function createNavBtn(direction) {
+    const btn = document.createElement('i');
+    btn.className = `fa fa-arrow-${direction}`;
+
+    return btn;
+  }
 };
 
 function initialize() {

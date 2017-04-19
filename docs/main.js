@@ -141,60 +141,68 @@ var createSlidesInsideSections = function createSlidesInsideSections(sections) {
   var secIDs = Object.keys(sections).filter(function (id) {
     return id.length > 2;
   });
+  var leftBtn = createNavBtn('left');
+  var rightBtn = createNavBtn('right');
 
   secIDs.forEach(function (id) {
     var slides = sections[id].getElementsByClassName('slide');
 
     if (slides.length !== 0) {
       var pagination = new Pagination(0, slides.length);
-      var leftBtn = createNavBtn('left');
-      var rightBtn = createNavBtn('right');
+      var color = '#' + id.slice(1, id.length);
 
       sections[id].append(leftBtn);
       sections[id].append(rightBtn);
 
       hideInactiveSlides(slides, pagination.currPage);
+      toggleSlideNavigation(pagination, leftBtn, rightBtn, color);
 
       leftBtn.onclick = function () {
         if (pagination.hasPrev()) {
           pagination.prevPage();
           hideInactiveSlides(slides, pagination.currPage);
         }
-        if (!pagination.hasPrev()) {
-          leftBtn.style.opacity = '0';
-        }
+        toggleSlideNavigation(pagination, leftBtn, rightBtn, color);
       };
       rightBtn.onclick = function () {
         if (pagination.hasNext()) {
           pagination.nextPage();
           hideInactiveSlides(slides, pagination.currPage);
         }
-        if (!pagination.hasNext()) {
-          rightBtn.style.opacity = '0';
-        }
+        toggleSlideNavigation(pagination, leftBtn, rightBtn, color);
       };
     }
-
-    function hideInactiveSlides(slides, currSlide) {
-      for (var i = 0; i < slides.length; i++) {
-        if (i !== currSlide) {
-          slides[i].className = 'slide slide-inactive';
-        } else {
-          slides[i].className = 'slide';
-        }
-      }
-    }
-
-    function createNavBtn(direction) {
-      var btn = document.createElement('i');
-      btn.className = 'fa fa-arrow-' + direction;
-
-      return btn;
-    }
-    // console.log(slides);
   });
 
-  // console.log(secIDs);
+  function toggleSlideNavigation(pagination, lBtn, rBtn, color) {
+    lBtn.style.opacity = '.9';
+    lBtn.style.color = color;
+    rBtn.style.opacity = '.9';
+    rBtn.style.color = color;
+    if (!pagination.hasPrev()) {
+      lBtn.style.opacity = '0';
+    }
+    if (!pagination.hasNext()) {
+      rBtn.style.opacity = '0';
+    }
+  }
+
+  function hideInactiveSlides(slides, currSlide) {
+    for (var i = 0; i < slides.length; i++) {
+      if (i !== currSlide) {
+        slides[i].className = 'slide slide-inactive';
+      } else {
+        slides[i].className = 'slide';
+      }
+    }
+  }
+
+  function createNavBtn(direction) {
+    var btn = document.createElement('i');
+    btn.className = 'fa fa-arrow-' + direction;
+
+    return btn;
+  }
 };
 
 function initialize() {
