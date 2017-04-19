@@ -204,6 +204,15 @@ var createSlidesInsideSections = function createSlidesInsideSections(sections) {
   }
 };
 
+var updateCounter = function updateCounter(pagination) {
+  var counter = document.getElementsByClassName('page-counter')[0];
+  var currPage = counter.getElementsByTagName('span')[0];
+  var totPages = counter.getElementsByTagName('span')[1];
+
+  currPage.innerHTML = pagination.currPage + 1;
+  totPages.innerHTML = pagination.totalPages;
+};
+
 function initialize() {
   var body = document.getElementsByTagName('body')[0];
   var sections = document.getElementsByTagName('section');
@@ -224,17 +233,20 @@ function initialize() {
   applyBorderToHeadings(sections);
   addAnimationToInfoTips();
   createSlidesInsideSections(sections);
+  updateCounter(pagination);
 
   nextBtn.onclick = function () {
     pagination.nextPage();
     setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
     updateUIComponents(sections, pagination, nextBtn, prevBtn);
+    updateCounter(pagination);
   };
 
   prevBtn.onclick = function () {
     pagination.prevPage();
     setBackgroundColor(body, colorsWithHashes[pagination.currPage]);
     updateUIComponents(sections, pagination, nextBtn, prevBtn);
+    updateCounter(pagination);
   };
 }
 
