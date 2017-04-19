@@ -133,11 +133,11 @@ const addAnimationToInfoTips = () => {
 
 const createSlidesInsideSections = (sections) => {
   const secIDs = Object.keys(sections).filter(id => id.length > 2);
-  const leftBtn = createNavBtn('left');
-  const rightBtn = createNavBtn('right');
 
   secIDs.forEach((id) => {
     const slides = sections[id].getElementsByClassName('slide');
+    const leftBtn = createNavBtn('left');
+    const rightBtn = createNavBtn('right');
 
     if (slides.length !== 0) {
       const pagination = new Pagination(0, slides.length);

@@ -141,11 +141,11 @@ var createSlidesInsideSections = function createSlidesInsideSections(sections) {
   var secIDs = Object.keys(sections).filter(function (id) {
     return id.length > 2;
   });
-  var leftBtn = createNavBtn('left');
-  var rightBtn = createNavBtn('right');
 
   secIDs.forEach(function (id) {
     var slides = sections[id].getElementsByClassName('slide');
+    var leftBtn = createNavBtn('left');
+    var rightBtn = createNavBtn('right');
 
     if (slides.length !== 0) {
       var pagination = new Pagination(0, slides.length);
